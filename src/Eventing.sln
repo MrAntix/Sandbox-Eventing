@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eventing.Common", "Eventing.Common\Eventing.Common.csproj", "{131D84AC-1045-440D-887C-46AE14F4A1E7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eventing.AddressBook.Domain", "Eventing.AddressBook.Domain\Eventing.AddressBook.Domain.csproj", "{16BD4C68-FFD5-42F5-A45D-747C8C52D485}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eventing.Tests", "Eventing.Tests\Eventing.Tests.csproj", "{841C88A8-F08F-4DAE-B2B4-32566DECBAFF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eventing.AddressBook.Contracts", "Eventing.AddressBook.Contracts\Eventing.AddressBook.Contracts.csproj", "{F07C494B-B065-4388-9EF5-2877E4F5332F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eventing.AddressBook.Application", "Eventing.AddressBook.Application\Eventing.AddressBook.Application.csproj", "{7A13B07C-82E8-4AF6-9236-EB98BA55B33F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{131D84AC-1045-440D-887C-46AE14F4A1E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{131D84AC-1045-440D-887C-46AE14F4A1E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{131D84AC-1045-440D-887C-46AE14F4A1E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{131D84AC-1045-440D-887C-46AE14F4A1E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16BD4C68-FFD5-42F5-A45D-747C8C52D485}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16BD4C68-FFD5-42F5-A45D-747C8C52D485}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16BD4C68-FFD5-42F5-A45D-747C8C52D485}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16BD4C68-FFD5-42F5-A45D-747C8C52D485}.Release|Any CPU.Build.0 = Release|Any CPU
+		{841C88A8-F08F-4DAE-B2B4-32566DECBAFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{841C88A8-F08F-4DAE-B2B4-32566DECBAFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{841C88A8-F08F-4DAE-B2B4-32566DECBAFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{841C88A8-F08F-4DAE-B2B4-32566DECBAFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F07C494B-B065-4388-9EF5-2877E4F5332F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F07C494B-B065-4388-9EF5-2877E4F5332F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F07C494B-B065-4388-9EF5-2877E4F5332F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F07C494B-B065-4388-9EF5-2877E4F5332F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A13B07C-82E8-4AF6-9236-EB98BA55B33F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A13B07C-82E8-4AF6-9236-EB98BA55B33F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A13B07C-82E8-4AF6-9236-EB98BA55B33F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A13B07C-82E8-4AF6-9236-EB98BA55B33F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
