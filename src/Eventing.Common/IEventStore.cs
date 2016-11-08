@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Eventing.Common
+﻿namespace Eventing.Common
 {
     public interface IEventStore
     {

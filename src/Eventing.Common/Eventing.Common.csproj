@@ -41,9 +41,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Event.cs" />
+    <Compile Include="EventDispatcher.cs" />
+    <Compile Include="EventDispatcherRepository.cs" />
     <Compile Include="Events.cs" />
     <Compile Include="IEvent.cs" />
+    <Compile Include="IEventDispatcher.cs" />
     <Compile Include="IEventHandler.cs" />
+    <Compile Include="IEventDispatcherRepository.cs" />
     <Compile Include="IEvents.cs" />
     <Compile Include="IEventStore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
