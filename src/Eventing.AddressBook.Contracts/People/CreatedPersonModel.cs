@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Eventing.AddressBook.Contracts
+namespace Eventing.AddressBook.Contracts.People
 {
     public class CreatedPersonModel
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Eventing.AddressBook.Application
+namespace Eventing.AddressBook.Application.People
 {
     public class PersonReader
     {

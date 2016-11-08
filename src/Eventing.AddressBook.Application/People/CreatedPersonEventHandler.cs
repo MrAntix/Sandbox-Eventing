@@ -1,11 +1,11 @@
 ﻿using System;
-using Eventing.AddressBook.Contracts;
+using Eventing.AddressBook.Contracts.People;
 using Eventing.Common;
 
-namespace Eventing.AddressBook.Application
+namespace Eventing.AddressBook.Application.People
 {
     public class CreatedPersonEventHandler :
-        IEventHandler<CreatedPersonEvent>
+        IEventHandler<CreatedPersonModel>
     {
         readonly Action<string> _log;
         readonly CreatedPersonWriter _writer;
@@ -18,11 +18,11 @@ namespace Eventing.AddressBook.Application
             _writer = writer;
         }
 
-        public void Handle(CreatedPersonEvent e)
+        public void Handle(Event<CreatedPersonModel> e)
         {
-            _writer.Write(e.CreatedPerson);
+            _writer.Write(e.Data);
 
-            _log($"[CREATED PERSON] {e.CreatedPerson.Identifier}");
+            _log($"[CREATED PERSON] {e.Data.Identifier}");
         }
     }
 }

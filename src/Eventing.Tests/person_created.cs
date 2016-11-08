@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
-using Eventing.AddressBook.Application;
-using Eventing.AddressBook.Contracts;
+using Eventing.AddressBook.Application.People;
+using Eventing.AddressBook.Contracts.People;
 using Eventing.AddressBook.Domain.People;
 using Eventing.Common;
 using Xunit;
@@ -25,13 +24,13 @@ namespace Eventing.Tests
         public void create_update_replay()
         {
             var are = new AutoResetEvent(false);
-            var log = (Action<string>)_output.WriteLine;
+            var log = (Action<string>) _output.WriteLine;
 
             var people = new List<Person>();
-            var eventStore = new TestEventStore();
+            var eventStore = GetEventStore();
             var events = GetEvents(eventStore);
             RegisterEvents(events, are, log, people);
-            
+
             var bob = ExecuteCreatePerson(events, "Bob");
 
             Assert.True(are.WaitOne(100));
@@ -40,22 +39,22 @@ namespace Eventing.Tests
 
             _output.WriteLine("\r\nReplay");
 
-            var newEventStore = new TestEventStore();
-            var newEvents = GetEvents(newEventStore);
             var newPeople = new List<Person>();
+            var newEventStore = GetEventStore();
+            var newEvents = GetEvents(newEventStore);
             RegisterEvents(newEvents, are, log, newPeople);
 
-            foreach (var e in eventStore.All())
-                newEvents.Replay(e);
+            for (var i = 1; i < eventStore.NextSequenceNumber; i++)
+                newEvents.Replay(eventStore.Get(i));
 
             Assert.Equal(people[0].Name, newPeople[0].Name);
 
-            foreach(var person in newPeople) 
+            foreach (var person in newPeople)
                 _output.WriteLine($"{person.Identifier} {person.Name}");
         }
 
-        static void RegisterEvents(IEvents events, 
-            AutoResetEvent are, Action<string> log, 
+        static void RegisterEvents(IEvents events,
+            AutoResetEvent are, Action<string> log,
             ICollection<Person> people)
         {
             var personReader = new PersonReader(people);
@@ -92,24 +91,32 @@ namespace Eventing.Tests
             return new Events(store);
         }
 
+        static IEventStore GetEventStore()
+        {
+            return new TestEventStore();
+        }
+
         class TestEventStore : IEventStore
         {
-            readonly IList<object> _list;
+            readonly IList<IEvent> _list;
 
-            public TestEventStore(
-                IList<object> list = null)
+            public TestEventStore()
             {
-                _list = list ?? new List<object>();
+                _list = new List<IEvent>();
             }
 
-            public IEnumerable<object> All()
-            {
-                return _list.ToArray();
-            }
+            public long NextSequenceNumber => _list.Count + 1;
 
-            public void Add(object e)
+            public long Add(IEvent e)
             {
                 _list.Add(e);
+
+                return e.SequenceNumber;
+            }
+
+            public IEvent Get(long sequenceNumber)
+            {
+                return _list[(int) sequenceNumber - 1];
             }
         }
     }

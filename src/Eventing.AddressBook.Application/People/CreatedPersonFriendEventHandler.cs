@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Threading;
-using Eventing.AddressBook.Contracts;
+using Eventing.AddressBook.Contracts.People;
 using Eventing.Common;
 
-namespace Eventing.AddressBook.Application
+namespace Eventing.AddressBook.Application.People
 {
     public class CreatedPersonFriendEventHandler :
-        IEventHandler<CreatedPersonFriendEvent>
+        IEventHandler<CreatedPersonFriendModel>
     {
         readonly Action<string> _log;
         readonly CreatedPersonWriter _writer;
@@ -23,11 +23,11 @@ namespace Eventing.AddressBook.Application
         }
 
 
-        public void Handle(CreatedPersonFriendEvent e)
+        public void Handle(Event<CreatedPersonFriendModel> e)
         {
-            _writer.Write(e.CreatedPerson);
+            _writer.Write(e.Data.CreatedPerson);
 
-            _log($"[CREATED PERSON FRIEND] {e.CreatedPerson.Identifier} for {e.FriendIdentifier}");
+            _log($"[CREATED PERSON FRIEND] {e.Data.CreatedPerson.Identifier} for {e.Data.FriendIdentifier}");
             _are.Set();
         }
     }

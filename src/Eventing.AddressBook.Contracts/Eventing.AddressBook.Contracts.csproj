@@ -40,12 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CreatedPersonEvent.cs" />
-    <Compile Include="CreatedPersonFriendEvent.cs" />
-    <Compile Include="CreatedPersonModel.cs" />
+    <Compile Include="People\CreatedPersonFriendModel.cs" />
+    <Compile Include="People\CreatedPersonModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UpdatedPersonNameEvent.cs" />
-    <Compile Include="UpdatedPersonNameModel.cs" />
+    <Compile Include="People\UpdatedPersonNameModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

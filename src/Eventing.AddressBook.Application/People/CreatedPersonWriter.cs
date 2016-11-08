@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Eventing.AddressBook.Contracts;
+using Eventing.AddressBook.Contracts.People;
 
-namespace Eventing.AddressBook.Application
+namespace Eventing.AddressBook.Application.People
 {
     public class CreatedPersonWriter
     {

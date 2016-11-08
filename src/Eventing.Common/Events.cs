@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 
 namespace Eventing.Common
 {
@@ -11,8 +9,11 @@ namespace Eventing.Common
     {
         readonly IEventStore _store;
 
-        readonly IDictionary<Type, IList> _handlers
-            = new ConcurrentDictionary<Type, IList>();
+        readonly IDictionary<Type, Func<object, IEvent>> _wrappers
+            = new ConcurrentDictionary<Type, Func<object, IEvent>>();
+
+        readonly IDictionary<Type, IList<Action<IEvent>>> _handlers
+            = new ConcurrentDictionary<Type, IList<Action<IEvent>>>();
 
         public Events(IEventStore store)
         {
@@ -21,45 +22,59 @@ namespace Eventing.Common
 
         void IEvents.Register<T>(IEventHandler<T> handler)
         {
+            if (handler == null) throw new ArgumentNullException(nameof(handler));
+
             var type = typeof(T);
-            IList registry;
+            IList<Action<IEvent>> registry;
 
             if (!_handlers.TryGetValue(type, out registry))
             {
-                registry = new List<IEventHandler<T>>();
+                registry = new List<Action<IEvent>>();
                 _handlers.Add(type, registry);
+
+                _wrappers.Add(type, data => new Event<T>(
+                        _store.NextSequenceNumber, DateTimeOffset.UtcNow,
+                        (T) data)
+                );
             }
 
-            _handlers[type].Add(handler);
+            _handlers[type].Add(d => handler.Handle((Event<T>) d));
         }
 
-        void IEvents.Raise<T>(T e)
+        void IEvents.Raise(object data)
         {
-            _store.Add(e);
+            if (data == null) throw new ArgumentNullException(nameof(data));
 
-            RaiseInternal(e);
+            var type = data.GetType();
+            Func<object, IEvent> wrapper;
+
+            if (!_wrappers.TryGetValue(type, out wrapper)) return;
+
+            var e = wrapper(data);
+
+            Raise(e);
         }
 
-        void RaiseInternal<T>(T e)
+        void IEvents.Replay(IEvent e)
         {
-            var type = e.GetType();
-            IList registry;
+            if (e == null) throw new ArgumentNullException(nameof(e));
+
+            Raise(e);
+        }
+
+        void Raise(IEvent e)
+        {
+            var type = e.Data.GetType();
+            IList<Action<IEvent>> registry;
 
             if (!_handlers.TryGetValue(type, out registry)) return;
 
-            foreach (var handler in registry.Cast<IEventHandler<T>>().ToArray())
+            _store.Add(e);
+
+            foreach (var handler in registry.ToArray())
             {
-                handler.Handle(e);
+                handler(e);
             }
-        }
-
-        void IEvents.Replay(object e)
-        {
-            var method = typeof(Events)
-                .GetMethod("RaiseInternal", BindingFlags.NonPublic | BindingFlags.Instance)
-                .MakeGenericMethod(e.GetType());
-
-            method.Invoke(this, new[] {e});
         }
     }
 }

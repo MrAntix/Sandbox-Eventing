@@ -1,4 +1,4 @@
-﻿using Eventing.AddressBook.Contracts;
+﻿using Eventing.AddressBook.Contracts.People;
 using Eventing.Common;
 
 namespace Eventing.AddressBook.Domain.People
@@ -16,9 +16,9 @@ namespace Eventing.AddressBook.Domain.People
 
         public void Execute(UpdatePersonNameCommand command)
         {
-            _events.Raise(new UpdatedPersonNameEvent(
-                    new UpdatedPersonNameModel(command.Identifier, command.NewName)
-                ));
+            _events.Raise(
+                new UpdatedPersonNameModel(command.Identifier, command.NewName)
+            );
         }
     }
 }

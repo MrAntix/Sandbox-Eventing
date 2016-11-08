@@ -1,10 +1,10 @@
 ﻿using System;
 
-namespace Eventing.AddressBook.Contracts
+namespace Eventing.AddressBook.Contracts.People
 {
-    public class CreatedPersonFriendEvent
+    public class CreatedPersonFriendModel
     {
-        public CreatedPersonFriendEvent(
+        public CreatedPersonFriendModel(
             CreatedPersonModel createdPerson,
             Guid friendIdentifier)
         {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Eventing.AddressBook.Contracts
+namespace Eventing.AddressBook.Contracts.People
 {
     public class UpdatedPersonNameModel
     {
@@ -9,6 +9,7 @@ namespace Eventing.AddressBook.Contracts
             Identifier = identifier;
             NewName = newName;
         }
+
         public Guid Identifier { get; set; }
         public string NewName { get; }
     }

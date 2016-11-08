@@ -1,11 +1,11 @@
 ﻿using System;
-using Eventing.AddressBook.Contracts;
+using Eventing.AddressBook.Contracts.People;
 using Eventing.Common;
 
-namespace Eventing.AddressBook.Application
+namespace Eventing.AddressBook.Application.People
 {
     public class UpdatedPersonNameEventHandler :
-        IEventHandler<UpdatedPersonNameEvent>
+        IEventHandler<UpdatedPersonNameModel>
     {
         readonly Action<string> _log;
         readonly PersonReader _reader;
@@ -20,13 +20,13 @@ namespace Eventing.AddressBook.Application
             _writer = writer;
         }
 
-        public void Handle(UpdatedPersonNameEvent e)
+        public void Handle(Event<UpdatedPersonNameModel> e)
         {
-            var person = _reader.Read(e.UpdatedPerson.Identifier);
+            var person = _reader.Read(e.Data.Identifier);
 
-            _log($"[UPDATED PERSON] {person.Identifier} {person.Name} => {e.UpdatedPerson.NewName}");
+            _log($"[UPDATED PERSON] {person.Identifier} {person.Name} => {e.Data.NewName}");
 
-            _writer.Write(e.UpdatedPerson);
+            _writer.Write(e.Data);
         }
     }
 }

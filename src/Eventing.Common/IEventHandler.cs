@@ -1,7 +1,7 @@
 ﻿namespace Eventing.Common
 {
-    public interface IEventHandler<in T>
+    public interface IEventHandler<T>
     {
-        void Handle(T e);
+        void Handle(Event<T> e);
     }
 }

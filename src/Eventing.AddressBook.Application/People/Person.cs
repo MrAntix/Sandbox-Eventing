@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Eventing.AddressBook.Application
+namespace Eventing.AddressBook.Application.People
 {
     public class Person
     {

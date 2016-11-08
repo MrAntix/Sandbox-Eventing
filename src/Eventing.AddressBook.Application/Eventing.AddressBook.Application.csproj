@@ -40,14 +40,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CreatedPersonEventHandler.cs" />
-    <Compile Include="CreatedPersonWriter.cs" />
-    <Compile Include="Person.cs" />
-    <Compile Include="PersonReader.cs" />
+    <Compile Include="People\CreatedPersonEventHandler.cs" />
+    <Compile Include="People\CreatedPersonWriter.cs" />
+    <Compile Include="People\Person.cs" />
+    <Compile Include="People\PersonReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="CreatedPersonFriendEventHandler.cs" />
-    <Compile Include="UpdatedPersonNameEventHandler.cs" />
-    <Compile Include="UpdatedPersonWriter.cs" />
+    <Compile Include="People\CreatedPersonFriendEventHandler.cs" />
+    <Compile Include="People\UpdatedPersonNameEventHandler.cs" />
+    <Compile Include="People\UpdatedPersonWriter.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Eventing.AddressBook.Contracts\Eventing.AddressBook.Contracts.csproj">

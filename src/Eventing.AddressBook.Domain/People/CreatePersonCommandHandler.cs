@@ -1,5 +1,5 @@
 ﻿using System;
-using Eventing.AddressBook.Contracts;
+using Eventing.AddressBook.Contracts.People;
 using Eventing.Common;
 
 namespace Eventing.AddressBook.Domain.People
@@ -22,7 +22,7 @@ namespace Eventing.AddressBook.Domain.People
         {
             var person = new CreatedPersonModel(Guid.NewGuid(), command.Name);
 
-            _events.Raise(new CreatedPersonEvent(person));
+            _events.Raise(person);
 
             var friend = _createFriend
                 .Execute(new CreatePersonFriendCommand(person.Identifier));
